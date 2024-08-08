@@ -52,4 +52,4 @@ bismark_genome_preparation \
 $GENOME_DIR
 
 ## Move output files to correct folder
-mv $GENOME_DIR/*.bt2 $OUTDIR
+mv $GENOME_DIR/Bisulfite_Genome $OUTDIR
