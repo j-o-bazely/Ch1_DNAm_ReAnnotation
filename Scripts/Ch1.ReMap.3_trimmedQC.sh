@@ -11,12 +11,12 @@
 #$ -tc 1
 
 
-####             Ch1_ReMap.1_rawQC              ####
+####             Ch1_ReMap.3_trimmedQC              ####
 # Written by: James B
 
 # Original Date: 07.08.2024
 
-# This code creates necessary folders for storing sample data and associated QC results of raw methylation reads
+# This code creates necessary folders for storing sample data and associated QC results of trimmed methylation reads
 # before running QC analysis on each sample
 
 # Tutorial for using fastQC: https://tinyurl.com/rut9jypw
