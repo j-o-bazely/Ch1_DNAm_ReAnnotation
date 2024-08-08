@@ -15,5 +15,10 @@ Aug 6th
 }
 
 
-Aug7th
+Aug 7th
 - Ch1.ReMap.3_trimmedQC.sh created
+
+Aug 8th
+- Ch1.ReMap.1_genomePrep.sh created
+- Ch1.ReMap.1_genomePrep.sh run and following output files generated:
+	

@@ -29,10 +29,10 @@
 module load bismark # v.0.22.1
 
 ## Assign path to genome to variable GENOME_DIR
-GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_ChangGenome
+GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
 
 ## Assign path to output directory
-OUTDIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap.1_data
+OUTDIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.1_data
 
 ## Specify the number of cores to use
 REPCORES=$((NSLOTS/2))
@@ -43,5 +43,4 @@ bismark_genome_preparation \
 $GENOME_DIR
 
 ## Move output files to correct folder
-# Move Bowtie2 index files from GENOME_DIR to OUTDIR
 mv $GENOME_DIR/*.bt2 $OUTDIR

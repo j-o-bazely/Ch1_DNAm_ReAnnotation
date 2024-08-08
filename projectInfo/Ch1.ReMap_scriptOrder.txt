@@ -4,7 +4,8 @@ More in-depth documentation can be found within the scripts, with each script in
 
 
 
-#1 Ch1.ReMap.1_
+#1 Ch1.ReMap.1_genomePrep.sh
+	- Uses bismark_genome_preparation to create the files necessary for Bismark to properly align reads to the genome later in the pipeline
 
 
 #2 Ch1.ReMap.2_
