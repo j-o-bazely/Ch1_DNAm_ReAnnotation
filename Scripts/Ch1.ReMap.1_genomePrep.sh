@@ -19,8 +19,11 @@
 
 # This code carries out preparation of the genome for alignment of methylation reads using bismark
 
-# FAQ for GCA_ vs GCF_ files   : https://tinyurl.com/38n289x3
 
+# Source for genome download   : https://tinyurl.com/56j75mcs
+# Paper for genome assembly    : https://tinyurl.com/3ebf4d62
+
+# FAQs for GCA_ vs GCF_ files   : https://tinyurl.com/38n289x3
 # NCBI glossary of genome terms: https://tinyurl.com/4jkevtxa
 
 
@@ -33,6 +36,12 @@ GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputDa
 
 ## Assign path to output directory
 OUTDIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.1_data
+
+## N.B The genome is downloaded in .fna format, which Bismark doesn't recognise.
+#      Luckily, .fna is synonymous with .fasta format, which bismark does recognise
+
+## Changing the genome file extension to a suitable format for bismark
+mv $GENOME_DIR/Chang23Genome.fna $GENOME_DIR/Chang23Genome.fasta
 
 ## Specify the number of cores to use
 REPCORES=$((NSLOTS/2))
