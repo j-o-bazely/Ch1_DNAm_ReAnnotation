@@ -24,7 +24,7 @@
 
 ####        Environment Preparation         ####
 
-## Moving into top Ch1.ReMap directory from script directory
+## Moving into top Ch1.ReMap directory from script directory (Assuming this script is being run from the script directory)
 cd ..
 
 ## Loading sample list to create array

@@ -20,5 +20,10 @@ Aug 7th
 
 Aug 8th
 - Ch1.ReMap.1_genomePrep.sh created
-- Ch1.ReMap.1_genomePrep.sh run and following output files generated:
+- Ch1.ReMap.1_genomePrep.sh run and following output directory generated:
+	bisulfite_genome
+- Ch1.ReMap.2_MethReadAlignAndMerge.sh created
+
+Aug 9th
+- Ch1.ReMap.2_MethReadAlignAndMerge.sh additions
 	
