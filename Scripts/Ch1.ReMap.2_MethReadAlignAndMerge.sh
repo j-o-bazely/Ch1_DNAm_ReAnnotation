@@ -195,33 +195,24 @@ fi
 
 if ! [[ -f "${READS_DIR}/${SAMPLE}_1_trim.fq.gz" && -f "${READS_DIR}/${SAMPLE}_2_trim.fq.gz" ]]; then
     for file in *; do
-  # Ensure it's a regular file
-  if [[ -f $file ]]; then
-    # Extract the suffix (everything after the third underscore)
-    suffix=$(echo "$file" | sed 's/^[^_]*_[^_]*_[^_]*_//')
-    
-    # Construct the new file name
-    new_filename="${SAMPLE}_${suffix}"
-    
-    # Rename the file
-    mv "$file" "$new_filename"
-    
-    # Output the new file name
-    echo "Renamed: $file -> $new_filename"
-  fi
+        # Extract the suffix (everything after the third underscore)
+        suffix=$(echo "$file" | sed 's/^[^_]*_[^_]*_[^_]*_//')
+        
+        # Construct the new file name
+        new_filename="${SAMPLE}_${suffix}"
+        
+        # Rename the file
+        mv "$file" "$new_filename"
+        
+        # Output the new file name
+        echo "Renamed: $file -> $new_filename"
+    done
 else
+    #### Checkpoint 3: Alignment ####
 
-
-
-
-####        Checkpoint 3: Alignment         ####
-
-# If a sample's files satisfy both of these conditions, then the files are ready to undergo alignment
-
-
+    # If a sample's files satisfy both of these conditions, then the files are ready to undergo alignment
 
     ### Run Bismark alignment ###
-
     echo -e "\n### Starting alignment for sample: ${SAMPLE} ###\n"
 
     bismark \
@@ -236,7 +227,6 @@ else
 
     # NB. Automatically has _pe.bam added to end of basename by default
 
-    
     ### Run Bismark deduplication ### 
     echo -e "\n### Starting deduplication for sample: ${SAMPLE} ###\n"
     
@@ -249,12 +239,7 @@ else
     
     echo -e "\n### Finished deduplication for sample: ${SAMPLE} ###\n"
     
-
-
     ### Sort deduplicated bam by name ###
-
-    # -n flag sorts by read name (required for meth calling)
-
     echo -e "### Sorting deduplicated bam by name for ${SAMPLE} ###"
 
     samtools sort -n -@ ${NSLOTS} \
@@ -263,11 +248,8 @@ else
 
     echo -e "### Sorted deduplicated bam by name for ${SAMPLE} ###"
 
-
     ### Delete unsorted bam ###
-
-    if [[ -f ${OUT_DIR}/${SAMPLE}_deduplicated.sorted_by_name.bam ]]; 
-    then
+    if [[ -f ${OUT_DIR}/${SAMPLE}_deduplicated.sorted_by_name.bam ]]; then
         echo -e "\n### Sorted bam for has been created for ${SAMPLE} ###"
         echo -e "\n### Deleting unsorted bam ###\n"
 
@@ -276,12 +258,12 @@ else
         rm ${OUT_DIR}/${SAMPLE}_pe.bam
         
         echo -e "### Deleted unsorted bam for ${SAMPLE} ###\n"
-        
     else
         echo -e "\n### Sorted bam does not exist for ${SAMPLE} ###"
         echo -e "### Will not delete unsorted bams ###\n"
     fi
 
     echo -e "### All done ###"
-fi
+fi # This closes the outer if-else block
+
 
