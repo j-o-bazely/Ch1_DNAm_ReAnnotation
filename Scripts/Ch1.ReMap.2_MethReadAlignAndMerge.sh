@@ -5,7 +5,7 @@
 #$ -pe smp 8
 #$ -l h_vmem=16G
 #$ -l h_rt=240:00:00
-#$ -t 1-17
+#$ -t 1-2
 #$ -l highmem
 
 
