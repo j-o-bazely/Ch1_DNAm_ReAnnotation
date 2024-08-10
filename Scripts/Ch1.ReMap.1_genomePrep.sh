@@ -30,7 +30,6 @@
 ####        Environment Preparation         ####
 ## Load necessary modules
 module load bismark # v.0.22.1
-module load bowtie2
 
 ## Assign path to genome to variable GENOME_DIR
 GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
