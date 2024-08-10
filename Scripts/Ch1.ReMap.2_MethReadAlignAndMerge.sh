@@ -64,8 +64,12 @@ cd $READS_DIR
 # Count the number of files in the directory
 FILE_COUNT=$(find . -maxdepth 1 -type f | wc -l)
 
+echo $FILE_COUNT
+
 # Check if there are 3 or more files
 if [ "$FILE_COUNT" -gt 2 ]; then
+
+echo 'There are more than 2 files for this sample, so merging is needed'
 
 # Check if merged file exists yet -> only run alignment if it doesn't
     if [[ -f ${OUT_DIR}/${SAMPLE}_deduplicated.bam ]]; 
