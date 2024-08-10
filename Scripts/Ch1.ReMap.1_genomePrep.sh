@@ -31,6 +31,7 @@
 ## Load necessary modules
 module load bismark # v.0.22.1
 
+
 ## Assign path to genome to variable GENOME_DIR
 GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
 
@@ -53,3 +54,7 @@ $GENOME_DIR
 
 ## Move output files to correct folder
 mv $GENOME_DIR/Bisulfite_Genome $OUTDIR
+
+## The reference genome is needed for the next script, so copy it into the same directory as the Bisulfite_Genome folder
+cp ${GENOME_DIR}/Chang23Genome.fasta $OUTDIR
+
