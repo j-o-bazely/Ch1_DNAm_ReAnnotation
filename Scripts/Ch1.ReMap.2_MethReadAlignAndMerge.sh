@@ -198,7 +198,7 @@ fi
 # If they don't then we must change the name
 
 if ! [[ -f "${READS_DIR}/${SAMPLE}_1_trim.fq.gz" && -f "${READS_DIR}/${SAMPLE}_2_trim.fq.gz" ]]; then
-    for file in *; do
+    for file in READS_DIR do
         # Extract the suffix (everything after the third underscore)
         suffix=$(echo "$file" | sed 's/^[^_]*_[^_]*_[^_]*_//')
         
