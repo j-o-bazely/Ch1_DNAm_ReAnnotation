@@ -259,4 +259,3 @@ if [[ -f ${OUT_DIR}/${SAMPLE}_deduplicated.sorted_by_name.bam ]];
 fi
 
 echo -e "### All done ###"
-
