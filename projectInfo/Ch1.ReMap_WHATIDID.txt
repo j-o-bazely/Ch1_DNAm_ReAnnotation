@@ -14,7 +14,6 @@ Aug 6th
 - Ch1.ReMap_scriptOrder.txt created
 }
 
-
 Aug 7th
 - Ch1.ReMap.3_trimmedQC.sh created
 
@@ -26,4 +25,15 @@ Aug 8th
 
 Aug 9th
 - Ch1.ReMap.2_MethReadAlignAndMerge.sh additions
+
+Aug 10th
+- Ch1.ReMap.4_BismarkAlign.sh started
+- Test run on 59-16D sample to handle unmerged data
+
+Aug 11th
+- Ch1.ReMap.4_BismarkAlign.sh extended to handle merged + unmerged data, run across all samples
+
+Aug 12th
+- Ch1.ReMap.5_MethCalling.sh written
+
 	

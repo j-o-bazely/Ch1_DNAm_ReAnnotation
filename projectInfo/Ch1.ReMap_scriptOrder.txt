@@ -8,10 +8,15 @@ More in-depth documentation can be found within the scripts, with each script in
 	- Uses bismark_genome_preparation to create the files necessary for Bismark to properly align reads to the genome later in the pipeline
 
 
-#2 Ch1.ReMap.2_
-
+#2 Ch1.ReMap.2_Bismarkalign.sh
+	- Uses bismark to align methylation reads to the genome prepared in the previous step.
+	- Outputs bam files which will then undergo methylation calling
 
 
 #3 Ch1.ReMap.3_trimmedQC.sh
 	- QC analysis of trimmed, deduplicated, merged reads to assess quality 
 	  before downstream analysis 
+
+#4 Ch1.ReMap.4_MethCalling.sh
+	- Calling of methylated CpG in bam files output from alignment, 
+	- Ends 

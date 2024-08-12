@@ -5,7 +5,7 @@
 #$ -pe smp 8
 #$ -l h_vmem=16G
 #$ -l h_rt=240:00:00
-#$ -t 1-2
+#$ -t 1-17
 #$ -l highmem
 
 
@@ -38,7 +38,7 @@ sample_list=$(pwd)/Metadata/Ch1.ReMap_SampleList.txt
 
 ## Extract sample ID ##
 sample_list=$(pwd)/Metadata/Ch1.ReMap_SampleList.txt
-SAMPLE=$(sed -n "${SGE_TASK_ID}p" $Sample_File)
+SAMPLE=$(sed -n "${SGE_TASK_ID}p" $sample_list)
 
 
 
