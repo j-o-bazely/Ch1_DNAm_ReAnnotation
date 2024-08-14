@@ -36,4 +36,8 @@ Aug 11th
 Aug 12th
 - Ch1.ReMap.5_MethCalling.sh written
 
+Aug 1th
+- Ch1.ReMap.4_BismarkAlign.sh finished running on array, produced bams in data storage
+- Ch1.ReMap.4_Bismarkalign.sh renamed to Ch1.ReMap.2_BismarkAlign.sh
+
 	
