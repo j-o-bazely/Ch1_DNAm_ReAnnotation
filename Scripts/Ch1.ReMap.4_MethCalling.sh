@@ -1,11 +1,11 @@
 #!/bin/bash
 #$ -pe smp 1
 #$ -l h_vmem=10G
-#$ -l h_rt=1:0:0
+#$ -l h_rt=240:0:0
 #$ -cwd
 #$ -j y
 #$ -m beas
-#$ -t 1:2
+#$ -t 1:17
 
 ####             Ch1_ReMap.4_MethCalling         ####
 
@@ -43,9 +43,13 @@ SAMPLE=$(sed -n "${SGE_TASK_ID}p" $sample_list)
 
 ## Set directories
 BAM_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.2_data/bams/$SAMPLE
+echo "BAM_DIR: ${BAM_DIR}"
 METH_CALL_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.4_data/$SAMPLE
+echo "METH_CALL_DIR: ${METH_CALL_DIR}"
 GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
+echo "GENOME_DIR: ${GENOME_DIR}"
 OUT_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.4_data/destrandedCalls/$SAMPLE
+echo "OUT_DIR: ${OUT_DIR}"
 
 
 ####        Step 1: Methylation Calling         ####
