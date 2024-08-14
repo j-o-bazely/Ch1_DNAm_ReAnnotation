@@ -5,7 +5,7 @@
 #$ -cwd
 #$ -j y
 #$ -m beas
-#$ -t 1:17
+#$ -t 1:2
 
 ####             Ch1_ReMap.5_MethCalling         ####
 
@@ -110,7 +110,7 @@ module unload samtools/1.9
 module load python/3.10.7
 
 ### Set scripts ###
-MERGE_CPG=/data/SBCS-EizaguirreLab/Turtle_WGBS/00_Scripts/01_WGBS_Bismark_Pipeline/merge_CpG.py
+MERGE_CPG=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_DNAm_ReAnnotation/Scripts/merge_CpG.py
 
 ### Navigate to directory containing meth calls
 cd $METH_CALL_DIR
@@ -133,7 +133,7 @@ for i in *CpG_report.txt.gz; do
   gzip *.cov # Zip output files
   chmod a+w *.cov.gz # Add permissions
 
-  mv *_merged.cov.gz $OUT_DIR/$SAMPLE
+  mv *_merged.cov.gz $OUT_DIR
   mv *_both_strands.cov.gz $METH_CALL_DIR/destranding_reports/both_strands
   mv *_merged.report.txt $METH_CALL_DIR/destranding_reports/$SAMPLE
 done
