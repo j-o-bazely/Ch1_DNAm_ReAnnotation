@@ -34,9 +34,6 @@ REPCORES=$((NSLOTS/2))
 ## Move into top Ch1.ReMap directory (Assuming this script is being run from the script directory)
 cd ..
 
-## Loading sample list to create array
-sample_list=$(pwd)/Metadata/Ch1.ReMap_SampleList.txt
-
 ## Extract sample ID ##
 sample_list=$(pwd)/Metadata/Ch1.ReMap_SampleList.txt
 SAMPLE=$(sed -n "${SGE_TASK_ID}p" $sample_list)

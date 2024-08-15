@@ -18,5 +18,4 @@ More in-depth documentation can be found within the scripts, with each script in
 	  before downstream analysis 
 
 #4 Ch1.ReMap.4_MethCalling.sh
-	- Calling of methylated CpG in bam files output from alignment, 
-	- Ends 
+	- Calling of methylated CpG

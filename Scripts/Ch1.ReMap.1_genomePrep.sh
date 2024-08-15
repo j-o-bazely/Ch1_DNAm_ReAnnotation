@@ -33,16 +33,17 @@ module load bismark # v.0.22.1
 
 
 ## Assign path to genome to variable GENOME_DIR
-GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
+#GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
+GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.1_data
 
 ## Assign path to output directory
-OUTDIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.1_data
+#OUTDIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.1_data
 
 ## N.B The genome is downloaded in .fna format, which Bismark doesn't recognise.
 #      Luckily, .fna is synonymous with .fasta format, which bismark does recognise
 
 ## Changing the genome file extension to a suitable format for bismark
-mv $GENOME_DIR/Chang23Genome.fna $GENOME_DIR/Chang23Genome.fasta
+#mv $GENOME_DIR/Chang23Genome.fna $GENOME_DIR/Chang23Genome.fasta
 
 ## Specify the number of cores to use
 REPCORES=$((NSLOTS/2))
@@ -53,8 +54,8 @@ bismark_genome_preparation \
 $GENOME_DIR
 
 ## Move output files to correct folder
-mv $GENOME_DIR/Bisulfite_Genome $OUTDIR
+#mv $GENOME_DIR/Bisulfite_Genome $OUTDIR
 
 ## The reference genome is needed for the next script, so copy it into the same directory as the Bisulfite_Genome folder
-cp ${GENOME_DIR}/Chang23Genome.fasta $OUTDIR
+#cp ${GENOME_DIR}/Chang23Genome.fasta $OUTDIR
 
