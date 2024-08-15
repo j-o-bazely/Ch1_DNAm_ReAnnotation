@@ -3,7 +3,7 @@
 #!/bin/bash
 #$ -pe smp 10
 #$ -l h_vmem=13G
-#$ -l h_rt=1:00:00
+#$ -l h_rt=3:00:00
 #$ -cwd
 #$ -j y
 #$ -m bea
@@ -35,7 +35,6 @@ module load bismark # v.0.22.1
 ## Assign path to genome to variable GENOME_DIR
 #GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
 GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.1_data
-
 ## Assign path to output directory
 #OUTDIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.1_data
 
