@@ -19,3 +19,4 @@ More in-depth documentation can be found within the scripts, with each script in
 
 #4 Ch1.ReMap.4_MethCalling.sh
 	- Calling of methylated CpG
+	- Output accepted by MethylKit for downstream analysis in R
