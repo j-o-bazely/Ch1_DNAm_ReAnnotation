@@ -62,7 +62,7 @@ bismark_methylation_extractor \
 --paired-end --comprehensive \
 --split_by_chromosome --no_header --gzip \
 --cytosine_report \
---output "$METH_CALL_DIR" \
+--output $METH_CALL_DIR \
 --genome_folder $GENOME_DIR \
 "$BAM_DIR/${SAMPLE}_deduplicated.sorted_by_name.bam"
 
@@ -179,7 +179,6 @@ ${SAMPLE}_chr24.CpG_merged.cov.gz \
 ${SAMPLE}_chr25.CpG_merged.cov.gz \
 ${SAMPLE}_chr26.CpG_merged.cov.gz \
 ${SAMPLE}_chr27.CpG_merged.cov.gz \
-${SAMPLE}_chr28.CpG_merged.cov.gz \
-${SAMPLE}_chr0.CpG_merged.cov.gz > $OUT_DIR/${SAMPLE}.CpG_merged.cov.gz
+${SAMPLE}_chr28.CpG_merged.cov.gz > $OUT_DIR/${SAMPLE}.CpG_merged.cov.gz
 
 module unload python/3.10.7
