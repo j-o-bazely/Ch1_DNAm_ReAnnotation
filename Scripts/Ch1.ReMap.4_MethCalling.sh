@@ -1,10 +1,11 @@
 #!/bin/bash
-#$ -pe smp 1
-#$ -l h_vmem=10G
-#$ -l h_rt=240:0:0
-#$ -cwd
 #$ -j y
-#$ -m beas
+#$ -cwd
+#$ -pe smp 10
+#$ -l h_vmem=13G
+#$ -l h_rt=240:00:00
+#$ -t 1-3
+#$ -l highmem
 #$ -t 1:17
 
 ####             Ch1_ReMap.4_MethCalling         ####
@@ -35,7 +36,7 @@ REPCORES=$((NSLOTS/2))
 cd ..
 
 ## Extract sample ID ##
-sample_list=$(pwd)/Metadata/Ch1.ReMap_SampleList.txt
+sample_list=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_DNAm_ReAnnotation/Metadata/Ch1.ReMap_SampleList.txt
 SAMPLE=$(sed -n "${SGE_TASK_ID}p" $sample_list)
 
 ## Set directories
