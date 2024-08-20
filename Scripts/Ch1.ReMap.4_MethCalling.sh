@@ -3,7 +3,7 @@
 #$ -cwd
 #$ -pe smp 10
 #$ -l h_vmem=13G
-#$ -l h_rt=240:00:00
+#$ -l h_rt=36:00:00
 #$ -t 1-3
 #$ -l highmem
 #$ -t 1:17
