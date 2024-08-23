@@ -48,7 +48,7 @@ SAMPLE=$(sed -n "${SGE_TASK_ID}p" $sample_list)
 ## Set directories
 BAM_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.2_data/bams/$SAMPLE
 METH_CALL_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.4_data/$SAMPLE
-GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
+GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome/
 OUT_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.4_data/destrandedCalls/$SAMPLE
 
 
@@ -68,7 +68,6 @@ bismark_methylation_extractor \
 --split_by_chromosome --no_header --gzip \
 --cytosine_report \
 --output $METH_CALL_DIR \
---multicore $REPCORES \
 --genome_folder $GENOME_DIR \
 "$BAM_DIR/${SAMPLE}_deduplicated.sorted_by_name.bam"
 
