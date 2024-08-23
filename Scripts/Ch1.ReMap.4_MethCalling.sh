@@ -229,6 +229,11 @@ module unload python/3.10.7
 # See https://docs.hpc.qmul.ac.uk/using/citing/ for details
 
 
+#### End timing
+end_time=$(date +%s)
+duration=$((end_time - start_time))
+
+
 # Calculate hours, minutes, and seconds
 hours=$(echo "scale=2; $duration / 3600" | bc)
 echo "Script ended at: $(date)"
