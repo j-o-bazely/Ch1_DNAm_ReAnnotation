@@ -1,12 +1,12 @@
 #!/bin/bash
 #$ -j y
 #$ -cwd
-#$ -pe smp 10
-#$ -l h_vmem=13G
+#$ -pe smp 9
+#$ -l h_vmem=11G
 #$ -l h_rt=36:00:00
 #$ -t 1-3
 #$ -l highmem
-#$ -t 1:17
+#$ -t 10:17
 
 ####             Ch1_ReMap.4_MethCalling         ####
 
@@ -41,13 +41,9 @@ SAMPLE=$(sed -n "${SGE_TASK_ID}p" $sample_list)
 
 ## Set directories
 BAM_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.2_data/bams/$SAMPLE
-echo "BAM_DIR: ${BAM_DIR}"
 METH_CALL_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.4_data/$SAMPLE
-echo "METH_CALL_DIR: ${METH_CALL_DIR}"
 GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
-echo "GENOME_DIR: ${GENOME_DIR}"
 OUT_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.4_data/destrandedCalls/$SAMPLE
-echo "OUT_DIR: ${OUT_DIR}"
 
 
 ####        Step 1: Methylation Calling         ####
@@ -56,7 +52,9 @@ echo "OUT_DIR: ${OUT_DIR}"
 module load bismark # v.0.22.1
 
 ## Create directories for storing methylation calls if needed 
-mkdir -p "$METH_CALL_DIR"
+mkdir -p $METH_CALL_DIR
+
+mkdir -p $OUT_DIR
 
 ## Perform Bismark alignment ##
 bismark_methylation_extractor \
@@ -114,7 +112,41 @@ module load python/3.10.7
 ### Set scripts ###
 MERGE_CPG=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_DNAm_ReAnnotation/Scripts/merge_CpG.py
 
-### Navigate to directory containing meth calls
+                    # NAME CHANGE #
+# Navigate to the directory containing the files
+cd $METH_CALL_DIR/cytosineReports 
+
+# Create directory for non-chromosome reads
+mkdir NW_Files
+
+# Loop through all reports
+for file in *.CpG_report.txt.gz; do
+
+    # If the file contains 'chrNW', move it to the NW_Files subdirectory 
+    if [[ "$file" == *chrNW* ]]; then
+        mv "$file" NW_Files
+        echo "Moved $file to NW_Files/"
+        continue  # Skip renaming since the file has been moved
+    fi
+
+    # Extract the chromosome part from the filename
+    chr=$(echo "$file" | grep -oP 'chrNC_[0-9]+\.1')
+
+    # Construct the new filename
+    new_name="${SAMPLE}_${chr}.CpG_report.txt.gz"
+
+    # Rename the file
+    mv "$file" "$new_name"
+
+    echo "Renamed $file to $new_name"
+done
+
+cd ../..
+
+    #   NAME CHANGE DONE    #
+
+mkdir -p $OUT_DIR
+
 cd $METH_CALL_DIR
 
 mkdir -p destranding_reports
@@ -134,52 +166,58 @@ for i in *CpG_report.txt.gz; do
   # Tidy output
   gzip *.cov # Zip output files
   chmod a+w *.cov.gz # Add permissions
-
-  mv *_merged.cov.gz $OUT_DIR
-  mv *_both_strands.cov.gz $METH_CALL_DIR/destranding_reports/both_strands
-  mv *_merged.report.txt $METH_CALL_DIR/destranding_reports/$SAMPLE
 done
+
+mv *_merged.cov.gz $OUT_DIR
+mv *_both_strands.cov.gz $METH_CALL_DIR/destranding_reports/both_strands
+mv *_merged.report.txt $METH_CALL_DIR/destranding_reports/$SAMPLE
 
 echo -e "\n### DONE ###\n"
 
-####        Step 3: Merging Destranded Chromosomes         ####
-## Create directory if needed ##
-mkdir -p $OUT_DIR/$SAMPLE
 
+####        Step 3: Merging Destranded Chromosomes         ####
 # Move into correct directory
-cd $OUT_DIR/$SAMPLE
+echo 'Moving into $OUT_DIR'
+cd $OUT_DIR
 
 ### Merge all chrom meth calls ###
-# With chr0 at end -> doing it manually rather than with *
+# doing it manually rather than with *
 
+echo 'Merging the chromosomes into one merged folder for the sample'
 cat \
-${SAMPLE}_chr1.CpG_merged.cov.gz \
-${SAMPLE}_chr2.CpG_merged.cov.gz \
-${SAMPLE}_chr3.CpG_merged.cov.gz \
-${SAMPLE}_chr4.CpG_merged.cov.gz \
-${SAMPLE}_chr5.CpG_merged.cov.gz \
-${SAMPLE}_chr6.CpG_merged.cov.gz \
-${SAMPLE}_chr7.CpG_merged.cov.gz \
-${SAMPLE}_chr8.CpG_merged.cov.gz \
-${SAMPLE}_chr9.CpG_merged.cov.gz \
-${SAMPLE}_chr10.CpG_merged.cov.gz \
-${SAMPLE}_chr11.CpG_merged.cov.gz \
-${SAMPLE}_chr12.CpG_merged.cov.gz \
-${SAMPLE}_chr13.CpG_merged.cov.gz \
-${SAMPLE}_chr14.CpG_merged.cov.gz \
-${SAMPLE}_chr15.CpG_merged.cov.gz \
-${SAMPLE}_chr16.CpG_merged.cov.gz \
-${SAMPLE}_chr17.CpG_merged.cov.gz \
-${SAMPLE}_chr18.CpG_merged.cov.gz \
-${SAMPLE}_chr19.CpG_merged.cov.gz \
-${SAMPLE}_chr20.CpG_merged.cov.gz \
-${SAMPLE}_chr21.CpG_merged.cov.gz \
-${SAMPLE}_chr22.CpG_merged.cov.gz \
-${SAMPLE}_chr23.CpG_merged.cov.gz \
-${SAMPLE}_chr24.CpG_merged.cov.gz \
-${SAMPLE}_chr25.CpG_merged.cov.gz \
-${SAMPLE}_chr26.CpG_merged.cov.gz \
-${SAMPLE}_chr27.CpG_merged.cov.gz \
-${SAMPLE}_chr28.CpG_merged.cov.gz > $OUT_DIR/${SAMPLE}.CpG_merged.cov.gz
+${SAMPLE}_chrNC_064473.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064474.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064475.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064476.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064477.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064478.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064479.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064480.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064481.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064482.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064483.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064484.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064485.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064486.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064487.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064488.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064489.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064490.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064491.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064492.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064493.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064494.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064495.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064496.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064497.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064498.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064499.CpG_merged.cov.gz \
+${SAMPLE}_chrNC_064500.CpG_merged.cov.gz > $OUT_DIR/${SAMPLE}.CpG_merged.cov.gz
 
 module unload python/3.10.7
+
+
+# Generated by Job Script Builder on 2024-08-22
+# For assistance, please email its-research-support@qmul.ac.uk
+# Please cite use of Apocrita in your Research
+# See https://docs.hpc.qmul.ac.uk/using/citing/ for details
