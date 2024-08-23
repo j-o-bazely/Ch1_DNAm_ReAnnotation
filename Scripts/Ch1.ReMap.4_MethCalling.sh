@@ -68,6 +68,7 @@ bismark_methylation_extractor \
 --split_by_chromosome --no_header --gzip \
 --cytosine_report \
 --output $METH_CALL_DIR \
+--multicore $REPCORES \
 --genome_folder $GENOME_DIR \
 "$BAM_DIR/${SAMPLE}_deduplicated.sorted_by_name.bam"
 
