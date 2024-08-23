@@ -8,6 +8,12 @@
 #$ -l highmem
 #$ -t 10:17
 
+# Start time
+start_time=$(date +%s)
+
+echo "Script started at: $(date)"
+
+
 ####             Ch1_ReMap.4_MethCalling         ####
 
 # Created by: James B
@@ -221,3 +227,9 @@ module unload python/3.10.7
 # For assistance, please email its-research-support@qmul.ac.uk
 # Please cite use of Apocrita in your Research
 # See https://docs.hpc.qmul.ac.uk/using/citing/ for details
+
+
+# Calculate hours, minutes, and seconds
+hours=$(echo "scale=2; $duration / 3600" | bc)
+echo "Script ended at: $(date)"
+echo "Total execution time: $hours hours"
