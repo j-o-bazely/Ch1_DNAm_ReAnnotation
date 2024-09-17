@@ -38,7 +38,7 @@ module load bismark # v.0.22.1
 
 
 ## Assign path to genome to variable GENOME_DIR
-GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1.ReMap_data/Ch1.ReMap.1_data
+GENOME_DIR=/data/SBCS-EizaguirreLab/James_B/cleanPHD/Ch1_dataStorage/Ch1_inputData/Ch1_ChangGenome
 
 ## N.B The genome is downloaded in .fna format, which Bismark doesn't recognise.
 #      Luckily, .fna is synonymous with .fasta format, which bismark does recognise.
